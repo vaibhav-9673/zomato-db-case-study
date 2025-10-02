@@ -33,12 +33,47 @@ The project also includes analytical SQL queries for **customer insights, restau
 ---
 
 ## 📊 Example Queries
-- Which customers placed more than 10 orders?  
-- Who are the top 10 customers by total spending?  
-- Which restaurant earned the highest revenue?  
-- Most popular menu item across all restaurants  
-- Delivery efficiency analysis (avg delivery time)  
+-- 1. Customer Analytics
+# Who are the top 10 customers by total spending?
+# Which customers placed more than 1 orders?
+# Which customers have ordered from multiple restaurants?
+# Which customer ordered the highest number of items overall?
+# What is the average order value per customer?
 
----
+-- 2. Restaurant Performance
+# Which restaurant earned the most revenue?
+# Which are the top 3 restaurants by number of orders?
+# Which restaurant has the highest average order value?
+# Which restaurants have not received any orders?
+# Which restaurant has the highest number of unique customers?
+
+-- 3. Menu Popularity
+# What is the most popular menu item across all restaurants?
+# Which restaurant’s menu item is the best-selling overall?
+# What are the top 5 most ordered items in 2025 ?
+# Which category of items (e.g., drinks, main course) is ordered the most?
+# Which items are frequently ordered together (combo analysis)?
+
+-- 4. Delivery Efficiency
+# Which rider has completed the most deliveries?
+# What is the average delivery time per rider?
+# Which riders have more than 50 successful deliveries?
+# How many orders were cancelled due to delivery issues?
+# Which rider has the best average delivery time performance?
+
+-- 5. Time-Based Insights
+# Which time slot (morning, afternoon, evening, night) has the most orders?
+# What is the busiest day of the week for orders?
+# What month in 2025 had the highest number of orders?
+# How do order volumes change between weekdays and weekends?
+# At what hour of the day are maximum orders placed?
+
+-- 6. Rating & Review Analysis
+# Which restaurant has the best average rating (with at least 10 reviews)?
+# Which rider has the highest average rating?
+# Which customers gave the most reviews?
+# What is the distribution of restaurant ratings (1–5 stars)?
+# What percentage of reviews include customer comments?
+
 
 
