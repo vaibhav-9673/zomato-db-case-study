@@ -1,5 +1,56 @@
-# zomato-db-case-study
-A Zomato-db-case-study database in MySQL with synthetic data and analytical SQL queries for customer, restaurant, menu, delivery, and reviews insights.
+# Project Overview
+Project Title: zomato-db-case-study
+Database: zomato_db
+
+The zomato-db-case-study project is a relational database system built using MySQL that simulates an online food delivery platform like Zomato.
+It manages data related to customers, restaurants, riders, orders, menu items, deliveries, and reviews.
+The schema is carefully designed with foreign keys, constraints, and indexes to maintain data integrity and optimize query performance.
+Synthetic data is generated using Python Faker, ensuring realistic Indian names, addresses, and phone numbers, with timestamps distributed between 2020–2025.
+This provides a large dataset to explore customer behavior, restaurant performance, menu popularity, delivery efficiency, and review analysis.
+The project includes over 30 analytical SQL queries, such as identifying top customers, calculating revenue per restaurant, analyzing delivery times, and finding the most popular menu items.
+
+# Objective
+The main objective of the zomato-db-case-study project is to design and implement a relational database named zomato_db that simulates an online food delivery platform.
+It focuses on:
+1. Efficiently managing data for customers, restaurants, riders, orders, and reviews.
+2. Practicing SQL queries to analyze customer behavior, restaurant performance, and order insights.
+3. Creating a realistic dataset using Faker for hands-on learning.
+4. Building a foundation for data analytics and decision-making in the food delivery industry.
+
+# Project Structure
+## 1. Database setup
+Database Creation:
+The project begins by creating a database named zomato_db to store all data related to the food delivery platform.
+
+Table Creation:
+Multiple tables are created to capture different entities in the system:
+
+customers – stores customer details like name, phone number, email, city, address, and registration date.
+
+restaurants – stores restaurant information including name, city, address, and operating hours.
+
+riders – stores delivery partner details, signup date, rating, and active status.
+
+orders – stores order information such as customer ID, restaurant ID, order datetime, status, total amount, and payment mode.
+
+order_items – stores items in each order, including menu item ID, quantity, item price, and total price.
+
+menu_items – stores menu details like item name, category, price, availability, and the restaurant it belongs to.
+
+deliveries – stores delivery details including order ID, assigned rider, delivery status, pickup and delivery timestamps.
+
+reviews – stores customer ratings and comments for both restaurants and riders.
+
+Each table is designed with primary keys, foreign keys, and constraints to maintain referential integrity and ensure accurate relationships between customers, restaurants, orders, and deliveries.
+
+
+
+
+
+
+
+
+
 
 # 🍽️ Zomato_DB - Food Delivery Database (MySQL)
 
