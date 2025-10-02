@@ -141,6 +141,10 @@ CREATE TABLE REVIEWS (
 
 ## 2. Restaurant Performance
 #### A) Which restaurant earned the most revenue?
+```SELECT C.CUSTOMER_ID, C.CUSTOMER_NAME, SUM(TOTAL_AMOUNT) AS TOTAL_SPENDING FROM CUSTOMERS C 
+INNER JOIN ORDERS O ON C.CUSTOMER_ID = O.CUSTOMER_ID
+GROUP BY C.CUSTOMER_ID ORDER BY SUM(TOTAL_AMOUNT) DESC LIMIT 10;```
+
 #### B) Which are the top 3 restaurants by number of orders?
 #### C) Which restaurant has the highest average order value?
 #### D) Which restaurants have not received any orders?
@@ -174,5 +178,10 @@ CREATE TABLE REVIEWS (
 #### D) What is the distribution of restaurant ratings (1–5 stars)?
 #### E) What percentage of reviews include customer comments?
 
+# ✅ Conclusion
+The zomato-db-case-study project demonstrates the design and implementation of a comprehensive MySQL relational database for an online food delivery platform.
+It successfully captures all key entities, including customers, restaurants, orders, menu items, riders, deliveries, and reviews, while maintaining data integrity through foreign keys and constraints.Analysis of the dataset provides valuable insights into customer behavior, restaurant performance, menu popularity, delivery efficiency, and ratings.Top-spending customers, most popular dishes, peak ordering times, and high-performing restaurants were identified, highlighting actionable trends for business optimization.The project also emphasizes synthetic data generation using Python Faker, realistic timestamps, and Indian customer/restaurant details, making it ideal for SQL practice, analytics, and academic purposes.
+       Overall, this case study provides a complete end-to-end simulation of a food delivery ecosystem, demonstrating how relational databases support data-driven decision-making and operational efficiency in real-world applications.
 
-
+# Author - Vaibhav Gade
+This project (zomato-db-case-study) is part of my portfolio, showcasing the SQL skills essential for data analyst roles.
