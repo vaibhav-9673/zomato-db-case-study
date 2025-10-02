@@ -134,6 +134,10 @@ CREATE TABLE REVIEWS (
 ## 📊 Example Queries
 ## 1. Customer Analytics
 #### A) Who are the top 10 customers by total spending?
+```SELECT C.CUSTOMER_ID, C.CUSTOMER_NAME, SUM(TOTAL_AMOUNT) AS TOTAL_SPENDING FROM CUSTOMERS C 
+INNER JOIN ORDERS O ON C.CUSTOMER_ID = O.CUSTOMER_ID
+GROUP BY C.CUSTOMER_ID ORDER BY SUM(TOTAL_AMOUNT) DESC LIMIT 10;
+```
 #### B) Which customers placed more than 1 orders?
 #### C) Which customers have ordered from multiple restaurants?
 #### D) Which customer ordered the highest number of items overall?
@@ -141,10 +145,6 @@ CREATE TABLE REVIEWS (
 
 ## 2. Restaurant Performance
 #### A) Which restaurant earned the most revenue?
-```SELECT C.CUSTOMER_ID, C.CUSTOMER_NAME, SUM(TOTAL_AMOUNT) AS TOTAL_SPENDING FROM CUSTOMERS C 
-INNER JOIN ORDERS O ON C.CUSTOMER_ID = O.CUSTOMER_ID
-GROUP BY C.CUSTOMER_ID ORDER BY SUM(TOTAL_AMOUNT) DESC LIMIT 10;```
-
 #### B) Which are the top 3 restaurants by number of orders?
 #### C) Which restaurant has the highest average order value?
 #### D) Which restaurants have not received any orders?
