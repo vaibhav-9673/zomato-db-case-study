@@ -21,27 +21,107 @@ It focuses on:
 ## 1. Database setup
 Database Creation:
 The project begins by creating a database named zomato_db to store all data related to the food delivery platform.
-
 Table Creation:
-Multiple tables are created to capture different entities in the system:
+1. customers – stores customer details like name, phone number, email, city, address, and registration date.
+2. restaurants – stores restaurant information including name, city, address, and operating hours.
+3. riders – stores delivery partner details, signup date, rating, and active status.
+4. orders – stores order information such as customer ID, restaurant ID, order datetime, status, total amount, and payment mode.
+5. order_items – stores items in each order, including menu item ID, quantity, item price, and total price.
+6. menu_items – stores menu details like item name, category, price, availability, and the restaurant it belongs to.
+7. deliveries – stores delivery details including order ID, assigned rider, delivery status, pickup and delivery timestamps.
+8. reviews – stores customer ratings and comments for both restaurants and riders.
 
-customers – stores customer details like name, phone number, email, city, address, and registration date.
+CREATE DATABASE ZOMATO_DB;
+USE ZOMATO_DB;
 
-restaurants – stores restaurant information including name, city, address, and operating hours.
+CREATE TABLE CUSTOMERS (
+  CUSTOMER_ID INT AUTO_INCREMENT PRIMARY KEY,
+  CUSTOMER_NAME VARCHAR(100) NOT NULL,
+  PHONE VARCHAR(20) NOT NULL UNIQUE,
+  EMAIL VARCHAR(50),
+  CITY VARCHAR(50),
+  ADDRESS TEXT,
+  REG_DATE DATE
+);
 
-riders – stores delivery partner details, signup date, rating, and active status.
+CREATE TABLE RESTAURANTS (
+  RESTAURANT_ID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  RESTAURANT_NAME VARCHAR(150) NOT NULL,
+  CITY VARCHAR(50),
+  ADDRESS TEXT,
+  CUISINE_TYPE VARCHAR(100), -- Added
+  OPENING_HOURS JSON,
+  PHONE VARCHAR(20) UNIQUE
+);
 
-orders – stores order information such as customer ID, restaurant ID, order datetime, status, total amount, and payment mode.
+CREATE TABLE RIDERS (
+  RIDER_ID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  RIDER_NAME VARCHAR(100) NOT NULL,
+  PHONE VARCHAR(20) UNIQUE, -- Recommended for contact
+  SIGN_UP_DATE DATE,
+  RATING DECIMAL(2,1) DEFAULT NULL CHECK (RATING BETWEEN 0.0 AND 5.0),
+  IS_ACTIVE TINYINT(1) DEFAULT 1
+);
 
-order_items – stores items in each order, including menu item ID, quantity, item price, and total price.
+CREATE TABLE ORDERS (
+  ORDER_ID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  CUSTOMER_ID INT UNSIGNED NOT NULL,
+  RESTAURANT_ID INT UNSIGNED NOT NULL,
+  ORDER_DATETIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Changed DATETIME to TIMESTAMP
+  ORDER_STATUS ENUM('PLACED', 'PREPARING', 'READY', 'OUT_FOR_DELIVERY', 'DELIVERED', 'CANCELLED') DEFAULT 'PLACED',
+  TOTAL_AMOUNT DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  PAYMENT_MODE ENUM('CASH', 'CARD', 'WALLET', 'UPI') DEFAULT 'CASH',
+  FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMERS(CUSTOMER_ID) ON UPDATE CASCADE ON DELETE RESTRICT,
+  FOREIGN KEY (RESTAURANT_ID) REFERENCES RESTAURANTS(RESTAURANT_ID) ON UPDATE CASCADE ON DELETE RESTRICT
+);
 
-menu_items – stores menu details like item name, category, price, availability, and the restaurant it belongs to.
 
-deliveries – stores delivery details including order ID, assigned rider, delivery status, pickup and delivery timestamps.
+CREATE TABLE DELIVERIES (
+  DELIVERY_ID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  ORDER_ID INT UNSIGNED UNIQUE NOT NULL,
+  RIDER_ID INT UNSIGNED DEFAULT NULL,
+  DELIVERY_STATUS ENUM('PENDING', 'ASSIGNED', 'OUT_FOR_DELIVERY', 'DELIVERED', 'CANCELLED') DEFAULT 'PENDING',
+  PICKED_UP_AT DATETIME,
+  DELIVERED_AT DATETIME,
+  ESTIMATED_DELIVERY_TIME DATETIME,
+  FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (RIDER_ID) REFERENCES RIDERS(RIDER_ID) ON DELETE SET NULL ON UPDATE CASCADE
+);
 
-reviews – stores customer ratings and comments for both restaurants and riders.
+CREATE TABLE MENU_ITEMS (
+  MENU_ITEM_ID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  RESTAURANT_ID INT UNSIGNED NOT NULL,
+  ITEM_NAME VARCHAR(150) NOT NULL,
+  PRICE DECIMAL(8,2) NOT NULL CHECK (PRICE > 0),
+  CATEGORY VARCHAR(50),
+  IS_AVAILABLE TINYINT(1) DEFAULT 1,
+  FOREIGN KEY (RESTAURANT_ID) REFERENCES RESTAURANTS(RESTAURANT_ID) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
-Each table is designed with primary keys, foreign keys, and constraints to maintain referential integrity and ensure accurate relationships between customers, restaurants, orders, and deliveries.
+CREATE TABLE ORDER_ITEMS (
+  ORDER_ITEM_ID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  ORDER_ID INT UNSIGNED NOT NULL,
+  MENU_ITEM_ID INT UNSIGNED NOT NULL,
+  QUANTITY INT UNSIGNED NOT NULL DEFAULT 1 CHECK (QUANTITY > 0),
+  ITEM_PRICE DECIMAL(8,2) NOT NULL CHECK (ITEM_PRICE >= 0),
+  TOTAL_PRICE DECIMAL(10,2) AS (QUANTITY * ITEM_PRICE) STORED,
+  FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (MENU_ITEM_ID) REFERENCES MENU_ITEMS(MENU_ITEM_ID) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+CREATE TABLE REVIEWS (
+  REVIEW_ID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  CUSTOMER_ID INT UNSIGNED NOT NULL,
+  RESTAURANT_ID INT UNSIGNED NOT NULL,
+  RIDER_ID INT UNSIGNED, -- Now nullable: delivery may not have a rider
+  RESTAURANT_RATING TINYINT UNSIGNED CHECK (RESTAURANT_RATING BETWEEN 1 AND 5),
+  RIDER_RATING TINYINT UNSIGNED CHECK (RIDER_RATING BETWEEN 1 AND 5),
+  COMMENT TEXT,
+  CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMERS(CUSTOMER_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (RESTAURANT_ID) REFERENCES RESTAURANTS(RESTAURANT_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (RIDER_ID) REFERENCES RIDERS(RIDER_ID) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 
 
