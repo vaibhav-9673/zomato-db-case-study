@@ -34,46 +34,46 @@ The project also includes analytical SQL queries for **customer insights, restau
 
 ## 📊 Example Queries
 -- 1. Customer Analytics
-# Who are the top 10 customers by total spending?
-# Which customers placed more than 1 orders?
-# Which customers have ordered from multiple restaurants?
-# Which customer ordered the highest number of items overall?
-# What is the average order value per customer?
+A) Who are the top 10 customers by total spending?
+B) Which customers placed more than 1 orders?
+C) Which customers have ordered from multiple restaurants?
+D) Which customer ordered the highest number of items overall?
+E) What is the average order value per customer?
 
 -- 2. Restaurant Performance
-# Which restaurant earned the most revenue?
-# Which are the top 3 restaurants by number of orders?
-# Which restaurant has the highest average order value?
-# Which restaurants have not received any orders?
-# Which restaurant has the highest number of unique customers?
+A) Which restaurant earned the most revenue?
+B) Which are the top 3 restaurants by number of orders?
+C) Which restaurant has the highest average order value?
+D) Which restaurants have not received any orders?
+E) Which restaurant has the highest number of unique customers?
 
 -- 3. Menu Popularity
-# What is the most popular menu item across all restaurants?
-# Which restaurant’s menu item is the best-selling overall?
-# What are the top 5 most ordered items in 2025 ?
-# Which category of items (e.g., drinks, main course) is ordered the most?
-# Which items are frequently ordered together (combo analysis)?
+A) What is the most popular menu item across all restaurants?
+B) Which restaurant’s menu item is the best-selling overall?
+C) What are the top 5 most ordered items in 2025 ?
+D) Which category of items (e.g., drinks, main course) is ordered the most?
+D) Which items are frequently ordered together (combo analysis)?
 
 -- 4. Delivery Efficiency
-# Which rider has completed the most deliveries?
-# What is the average delivery time per rider?
-# Which riders have more than 50 successful deliveries?
-# How many orders were cancelled due to delivery issues?
-# Which rider has the best average delivery time performance?
+A) Which rider has completed the most deliveries?
+B) What is the average delivery time per rider?
+C) Which riders have more than 50 successful deliveries?
+D) How many orders were cancelled due to delivery issues?
+E) Which rider has the best average delivery time performance?
 
 -- 5. Time-Based Insights
-# Which time slot (morning, afternoon, evening, night) has the most orders?
-# What is the busiest day of the week for orders?
-# What month in 2025 had the highest number of orders?
-# How do order volumes change between weekdays and weekends?
-# At what hour of the day are maximum orders placed?
+A) Which time slot (morning, afternoon, evening, night) has the most orders?
+B) What is the busiest day of the week for orders?
+C) What month in 2025 had the highest number of orders?
+D) How do order volumes change between weekdays and weekends?
+E) At what hour of the day are maximum orders placed?
 
 -- 6. Rating & Review Analysis
-# Which restaurant has the best average rating (with at least 10 reviews)?
-# Which rider has the highest average rating?
-# Which customers gave the most reviews?
-# What is the distribution of restaurant ratings (1–5 stars)?
-# What percentage of reviews include customer comments?
+A)  Which restaurant has the best average rating (with at least 10 reviews)?
+B) Which rider has the highest average rating?
+C) Which customers gave the most reviews?
+D) What is the distribution of restaurant ratings (1–5 stars)?
+E) What percentage of reviews include customer comments?
 
 
 
