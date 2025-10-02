@@ -36,7 +36,9 @@ Table Creation:
 7. deliveries – stores delivery details including order ID, assigned rider, delivery status, pickup and delivery timestamps.
 8. reviews – stores customer ratings and comments for both restaurants and riders.
 
-'''sql
+```sql
+CREATE DATABASE p1_retail_db;
+
 CREATE TABLE retail_sales
 (
     transactions_id INT PRIMARY KEY,
@@ -51,7 +53,7 @@ CREATE TABLE retail_sales
     cogs FLOAT,
     total_sale FLOAT
 );
-'''
+```
 
 
 ## 📊 Example Queries
