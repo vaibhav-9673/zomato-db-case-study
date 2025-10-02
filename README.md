@@ -33,8 +33,8 @@ The project also includes analytical SQL queries for **customer insights, restau
 ---
 
 ## 📊 Example Queries
--- 1. Customer Analytics
-A) Who are the top 10 customers by total spending?
+## 1. Customer Analytics
+### Who are the top 10 customers by total spending?
 B) Which customers placed more than 1 orders?
 C) Which customers have ordered from multiple restaurants?
 D) Which customer ordered the highest number of items overall?
