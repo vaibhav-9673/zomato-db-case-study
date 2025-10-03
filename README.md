@@ -140,19 +140,22 @@ INNER JOIN ORDERS O ON C.CUSTOMER_ID = O.CUSTOMER_ID
 GROUP BY C.CUSTOMER_ID ORDER BY SUM(TOTAL_AMOUNT) DESC LIMIT 10;
 ```
 #### B) Which customers placed more than 1 orders?
-```SELECT C.CUSTOMER_ID, C.CUSTOMER_NAME, COUNT(*) AS TOTAL_ORDERS FROM CUSTOMERS C 
+```
+SELECT C.CUSTOMER_ID, C.CUSTOMER_NAME, COUNT(*) AS TOTAL_ORDERS FROM CUSTOMERS C 
 INNER JOIN ORDERS O ON C.CUSTOMER_ID = O.CUSTOMER_ID
 GROUP BY C.CUSTOMER_ID, C.CUSTOMER_NAME HAVING COUNT(*) > 1;
 ```
 #### C) Which customers have ordered from multiple restaurants?
-```SELECT c.customer_id, c.customer_name, COUNT(DISTINCT o.restaurant_id) AS total_restaurants
+```
+SELECT c.customer_id, c.customer_name, COUNT(DISTINCT o.restaurant_id) AS total_restaurants
 FROM customers c
 INNER JOIN orders o ON c.customer_id = o.customer_id
 GROUP BY c.customer_id, c.customer_name HAVING COUNT(DISTINCT o.restaurant_id) > 1
 ORDER BY total_restaurants DESC;
 ```
 #### D) Which customer ordered the highest number of items overall?
-```SELECT c.customer_id, c.customer_name, COUNT(oi.order_item_id) AS total_items_ordered
+```
+SELECT c.customer_id, c.customer_name, COUNT(oi.order_item_id) AS total_items_ordered
 FROM customers c
 JOIN orders o ON c.customer_id = o.customer_id
 JOIN order_items oi ON o.order_id = oi.order_id
@@ -161,7 +164,8 @@ ORDER BY total_items_ordered DESC
 LIMIT 1;
 ```
 #### E) What is the average order value per customer?
-```SELECT C.CUSTOMER_ID, C.CUSTOMER_NAME, ROUND(AVG(O.TOTAL_AMOUNT),2) AS AVG_ORDER_VALUE
+```
+SELECT C.CUSTOMER_ID, C.CUSTOMER_NAME, ROUND(AVG(O.TOTAL_AMOUNT),2) AS AVG_ORDER_VALUE
 FROM CUSTOMERS C 
 JOIN ORDERS O ON C.CUSTOMER_ID = O.CUSTOMER_ID
 GROUP BY C.CUSTOMER_ID, C.CUSTOMER_NAME 
@@ -170,34 +174,39 @@ ORDER BY ROUND(AVG(O.TOTAL_AMOUNT),2) DESC;
 
 ## 2. Restaurant Performance
 #### A) Which restaurant earned the most revenue?
-```SELECT R.RESTAURANT_ID, R.RESTAURANT_NAME, SUM(O.TOTAL_AMOUNT) AS TOTAL_REVENUE
+```
+SELECT R.RESTAURANT_ID, R.RESTAURANT_NAME, SUM(O.TOTAL_AMOUNT) AS TOTAL_REVENUE
 FROM RESTAURANTS R 
 JOIN ORDERS O ON R.RESTAURANT_ID = O.RESTAURANT_ID
 GROUP BY R.RESTAURANT_ID, R.RESTAURANT_NAME 
 ORDER BY SUM(O.TOTAL_AMOUNT) DESC;
 ```
 #### B) Which are the top 3 restaurants by number of orders?
-```SELECT R.RESTAURANT_ID, R.RESTAURANT_NAME, COUNT(O.ORDER_ID) AS TOTAL_ORDER
+```
+SELECT R.RESTAURANT_ID, R.RESTAURANT_NAME, COUNT(O.ORDER_ID) AS TOTAL_ORDER
 FROM RESTAURANTS R 
 JOIN ORDERS O ON R.RESTAURANT_ID = O.RESTAURANT_ID
 GROUP BY R.RESTAURANT_ID, R.RESTAURANT_NAME 
 ORDER BY COUNT(O.ORDER_ID) DESC;
 ```
 #### C) Which restaurant has the highest average order value?
-```SELECT R.RESTAURANT_ID, R.RESTAURANT_NAME, ROUND(AVG(O.TOTAL_AMOUNT),2) AS AVG_ORDER_VALUE
+```
+SELECT R.RESTAURANT_ID, R.RESTAURANT_NAME, ROUND(AVG(O.TOTAL_AMOUNT),2) AS AVG_ORDER_VALUE
 FROM RESTAURANTS R 
 JOIN ORDERS O ON R.RESTAURANT_ID = O.RESTAURANT_ID
 GROUP BY R.RESTAURANT_ID, R.RESTAURANT_NAME 
 ORDER BY AVG(O.TOTAL_AMOUNT) DESC;
 ```
 #### D) Which restaurants have not received any orders?
-```SELECT r.restaurant_id, r.restaurant_name
+```
+SELECT r.restaurant_id, r.restaurant_name
 FROM restaurants r
 LEFT JOIN orders o ON r.restaurant_id = o.restaurant_id
 WHERE o.order_id IS NULL;
 ```
 #### E) Which restaurant has the highest number of unique customers?
-```SELECT R.RESTAURANT_ID, R.RESTAURANT_NAME, COUNT(DISTINCT C.CUSTOMER_ID) AS TOTAL_UNIQUE_CUST
+```
+SELECT R.RESTAURANT_ID, R.RESTAURANT_NAME, COUNT(DISTINCT C.CUSTOMER_ID) AS TOTAL_UNIQUE_CUST
 FROM RESTAURANTS R 
 JOIN ORDERS O ON R.RESTAURANT_ID = O.RESTAURANT_ID
 JOIN CUSTOMERS C ON O.CUSTOMER_ID = C.CUSTOMER_ID
@@ -207,13 +216,15 @@ ORDER BY COUNT(DISTINCT C.CUSTOMER_ID) DESC;
 
 ## 3. Menu Popularity
 #### A) What is the most popular menu item across all restaurants?
-```SELECT M.MENU_ITEM_ID, M.ITEM_NAME, COUNT(*) AS TOTAL_ORDER FROM MENU_ITEMS M 
+```
+SELECT M.MENU_ITEM_ID, M.ITEM_NAME, COUNT(*) AS TOTAL_ORDER FROM MENU_ITEMS M 
 JOIN ORDER_ITEMS OI ON M.MENU_ITEM_ID = OI.MENU_ITEM_ID
 JOIN ORDERS O ON OI.ORDER_ID = O.ORDER_ID
 GROUP BY M.MENU_ITEM_ID, M.ITEM_NAME ORDER BY COUNT(*) DESC;
 ```
 #### B) Which restaurant’s menu item is the best-selling overall?
-```SELECT R.restaurant_id, R.restaurant_name, M.item_name, COUNT(OI.order_item_id) AS total_sold
+```
+SELECT R.restaurant_id, R.restaurant_name, M.item_name, COUNT(OI.order_item_id) AS total_sold
 FROM menu_items M
 JOIN order_items OI ON M.menu_item_id = OI.menu_item_id
 JOIN orders O ON OI.order_id = O.order_id
