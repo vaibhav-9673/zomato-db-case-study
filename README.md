@@ -129,9 +129,80 @@ CREATE TABLE REVIEWS (
   FOREIGN KEY (RIDER_ID) REFERENCES RIDERS(RIDER_ID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 ```
+## 2. Data Exploration & Cleaning
+Record Count: Checked the total number of records across all tables (e.g., customers, orders, menu_items, deliveries).
+Customer Count: Identified the number of unique customers in the customers table.
+Restaurant Count: Counted the total number of unique restaurants in the restaurants table.
+Menu Item Count: Determined the number of unique menu items in the menu_items table.
+Null Value Check: Verified if any columns (e.g., customer_name, restaurant_name, order_date, delivery_time) contained NULL values.
+Data Cleaning: Removed or handled records with missing data to maintain database consistency and ensure accurate analysis.
+```
+-- DATA CLEANING
+# 1. FOR TABLE CUSTOMERS
+SELECT * FROM CUSTOMERS
+WHERE CUSTOMER_ID IS NULL
+      OR CUSTOMER_NAME IS NULL
+      OR REG_DATE IS NULL;   -- THERE IS NO NULL VALUES
 
+# 2. FOR RESTAURANTS TABLE
+SELECT * FROM RESTAURANTS
+WHERE RESTAURANT_ID IS NULL
+	  OR RESTAURANT_NAME IS NULL
+      OR CITY IS NULL
+      OR OPENING_HOURS IS NULL;   -- THERE IS NO NULL VALUE
+      
+# 3. FRO RIDER TABLE
+SELECT * FROM RIDERS
+WHERE RIDER_ID IS NULL
+      OR RIDER_NAME IS NULL
+      OR SIGN_UP_DATE IS NULL
+      OR IS_ACTIVE IS NULL
+      OR RATING IS NULL;        -- THERE IS NO NULL VALUE
+      
+# 4. FOR MENU_ITEMS TABLE
+SELECT * FROM MENU_ITEMS
+WHERE MENU_ITEM_ID IS NULL
+      OR RESTAURANT_ID IS NULL
+      OR ITEM_NAME IS NULL
+      OR PRICE IS NULL
+      OR CATEGORY IS NULL
+      OR IS_AVAILABLE IS NULL;       -- THERE IS NO NULL VALUES
+      
+# 5. FOR ORDERS TABLE      
+SELECT * FROM ORDERS WHERE ORDER_ID IS NULL
+                           OR RESTAURANT_ID IS NULL
+                           OR CUSTOMER_ID IS NULL
+                           OR ORDER_STATUS IS NULL
+                           OR TOTAL_AMOUNT IS NULL
+                           OR PAYMENT_MODE IS NULL;        -- THERE IS NO NULL VALUES
+ 
+# 6. FOR ORDER_ITEMS TABLE
+SELECT * FROM ORDER_ITEMS WHERE ORDER_ITEM_ID IS NULL
+                          OR ORDER_ID IS NULL
+                          OR MENU_ITEM_ID IS NULL
+                          OR QUANTITY IS NULL
+                          OR ITEM_PRICE IS NULL
+                          OR TOTAL_PRICE IS NULL;           -- THERE IS NO NULL VALUES
 
-## 📊 Example Queries
+# 7. FOR DELIVERIES TABLE
+SELECT * FROM DELIVERIES WHERE DELIVERY_ID IS NULL 
+                         OR ORDER_ID IS NULL 
+                         OR RIDER_ID IS NULL
+                         OR DELIVERY_STATUS IS NULL;         -- THERE IS NO NULL VALUES
+
+ 
+-- CHECK AND REMOVE DUPLICATE VALUES
+
+# 1. FOR CUSTOMERS TABLE
+SELECT customer_name, phone, COUNT(*) AS duplicate_count FROM customers
+GROUP BY customer_name, phone HAVING COUNT(*) > 1 ;                      -- > THERE IS NO DUPLICATE VALUES
+
+# 2. FOR RESTAURANTS TABLE
+SELECT restaurant_name, COUNT(*) AS duplicate_count FROM restaurants
+GROUP BY restaurant_name, city HAVING COUNT(*) > 1;                   -- > YES THERE ARE 
+```
+
+# 📊 Data Analysis & Findings
 ## 1. Customer Analytics
 #### A) Who are the top 10 customers by total spending?
 ```
