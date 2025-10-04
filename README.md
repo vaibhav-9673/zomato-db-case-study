@@ -304,8 +304,48 @@ GROUP BY R.restaurant_id, R.restaurant_name, M.item_name
 ORDER BY total_sold DESC;
 ```
 #### C) What are the top 5 most ordered items in 2025 ?
+```
+SELECT 
+    M.item_name, 
+    COUNT(OI.order_item_id) AS total_orders
+FROM order_items OI
+JOIN orders O ON OI.order_id = O.order_id
+JOIN menu_items M ON OI.menu_item_id = M.menu_item_id
+WHERE YEAR(O.order_date) = 2025
+GROUP BY M.item_name
+ORDER BY total_orders DESC
+LIMIT 5;
+```
 ##### D) Which category of items (e.g., drinks, main course) is ordered the most?
+```
+SELECT 
+    M1.item_name AS item_1,
+    M2.item_name AS item_2,
+    COUNT(*) AS times_ordered_together
+FROM order_items OI1
+JOIN order_items OI2 
+    ON OI1.order_id = OI2.order_id AND OI1.menu_item_id < OI2.menu_item_id
+JOIN menu_items M1 ON OI1.menu_item_id = M1.menu_item_id
+JOIN menu_items M2 ON OI2.menu_item_id = M2.menu_item_id
+GROUP BY M1.item_name, M2.item_name
+ORDER BY times_ordered_together DESC
+LIMIT 10;
+```
 #### E) Which items are frequently ordered together (combo analysis)?
+```
+SELECT 
+    M1.item_name AS item_1,
+    M2.item_name AS item_2,
+    COUNT(*) AS times_ordered_together
+FROM order_items OI1
+JOIN order_items OI2 
+    ON OI1.order_id = OI2.order_id AND OI1.menu_item_id < OI2.menu_item_id
+JOIN menu_items M1 ON OI1.menu_item_id = M1.menu_item_id
+JOIN menu_items M2 ON OI2.menu_item_id = M2.menu_item_id
+GROUP BY M1.item_name, M2.item_name
+ORDER BY times_ordered_together DESC
+LIMIT 10;
+```
 
 ## 4. Delivery Efficiency
 #### A) Which rider has completed the most deliveries?
