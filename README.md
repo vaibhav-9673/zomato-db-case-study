@@ -1,7 +1,5 @@
 # 🍽️ Zomato_DB - Food Delivery Database (MySQL)
-A Zomato-style food delivery database built with **MySQL**.  
-It simulates customers, restaurants, riders, orders, menu items, deliveries, and reviews with **synthetic data** (generated using Python Faker).  
-The project also includes analytical SQL queries for **customer insights, restaurant performance, menu popularity, delivery efficiency, and rating analysis**.
+A Zomato-style food delivery database built with **MySQL**. It simulates customers, restaurants, riders, orders, menu items, deliveries, and reviews with **synthetic data** (generated using Python Faker). The project also includes analytical SQL queries for **customer insights, restaurant performance, menu popularity, delivery efficiency, and rating analysis**.
 
 # Project Overview
 Project Title: zomato-db-case-study
