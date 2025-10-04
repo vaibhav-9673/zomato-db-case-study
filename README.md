@@ -131,6 +131,7 @@ CREATE TABLE REVIEWS (
   FOREIGN KEY (RIDER_ID) REFERENCES RIDERS(RIDER_ID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 ```
+
 ## 2. Data Exploration & Cleaning
 Record Count: Checked the total number of records across all tables (e.g., customers, orders, menu_items, deliveries).
 Customer Count: Identified the number of unique customers in the customers table.
