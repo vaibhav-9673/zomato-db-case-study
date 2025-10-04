@@ -309,24 +309,128 @@ ORDER BY total_sold DESC;
 
 ## 4. Delivery Efficiency
 #### A) Which rider has completed the most deliveries?
+```
+SELECT delivery_partner, COUNT(*) AS total_deliveries FROM deliveries
+WHERE delivery_status = 'Delivered'
+GROUP BY delivery_partner ORDER BY total_deliveries DESC;
+```
 #### B) What is the average delivery time per rider?
+```
+SELECT delivery_partner, ROUND(AVG(delivery_time), 2) AS avg_delivery_time FROM deliveries
+WHERE delivery_status = 'Delivered'
+GROUP BY delivery_partner ORDER BY avg_delivery_time;
+```
 #### C) Which riders have more than 50 successful deliveries?
+```
+SELECT delivery_partner, COUNT(*) AS total_deliveries FROM deliveries
+WHERE delivery_status = 'Delivered'
+GROUP BY delivery_partner HAVING COUNT(*) > 50
+ORDER BY total_deliveries DESC;
+```
 #### D) How many orders were cancelled due to delivery issues?
+```
+SELECT COUNT(*) AS cancelled_due_to_delivery FROM deliveries
+WHERE delivery_status = 'Cancelled';
+```
 #### E) Which rider has the best average delivery time performance?
+```
+SELECT delivery_partner, ROUND(AVG(delivery_time), 2) AS avg_time FROM deliveries
+WHERE delivery_status = 'Delivered'
+GROUP BY delivery_partner ORDER BY avg_time ASC
+LIMIT 1;
+```
 
 ## 5. Time-Based Insights
 #### A) Which time slot (morning, afternoon, evening, night) has the most orders?
+```
+SELECT 
+    CASE 
+        WHEN HOUR(order_time) BETWEEN 5 AND 11 THEN 'Morning'
+        WHEN HOUR(order_time) BETWEEN 12 AND 16 THEN 'Afternoon'
+        WHEN HOUR(order_time) BETWEEN 17 AND 21 THEN 'Evening'
+        ELSE 'Night'
+    END AS time_slot,
+    COUNT(order_id) AS total_orders
+FROM orders
+GROUP BY time_slot
+ORDER BY total_orders DESC;
+```
 #### B) What is the busiest day of the week for orders?
+```
+SELECT DAYNAME(order_date) AS day_of_week, COUNT(order_id) AS total_orders
+FROM orders
+GROUP BY DAYNAME(order_date)
+ORDER BY total_orders DESC;
+```
 #### C) What month in 2025 had the highest number of orders?
+```
+SELECT MONTHNAME(order_date) AS month_2025, COUNT(order_id) AS total_orders FROM orders
+WHERE YEAR(order_date) = 2025
+GROUP BY MONTHNAME(order_date)
+ORDER BY total_orders DESC;
+```
 #### D) How do order volumes change between weekdays and weekends?
+```
+SELECT 
+    CASE 
+        WHEN DAYOFWEEK(order_date) IN (1,7) THEN 'Weekend'
+        ELSE 'Weekday'
+    END AS day_type,
+    COUNT(order_id) AS total_orders
+FROM orders
+GROUP BY day_type;
+```
 #### E) At what hour of the day are maximum orders placed?
+```
+SELECT HOUR(order_time) AS order_hour, COUNT(order_id) AS total_orders
+FROM orders
+GROUP BY HOUR(order_time)
+ORDER BY total_orders DESC
+LIMIT 1;
+```
 
 ## 6. Rating & Review Analysis
 #### A)  Which restaurant has the best average rating (with at least 10 reviews)?
+```
+SELECT R.restaurant_id, R.restaurant_name, 
+       ROUND(AVG(Rev.restaurant_rating), 2) AS avg_rating, 
+       COUNT(Rev.review_id) AS total_reviews
+FROM reviews Rev
+JOIN restaurants R ON Rev.restaurant_id = R.restaurant_id
+GROUP BY R.restaurant_id, R.restaurant_name
+HAVING COUNT(Rev.review_id) >= 10
+ORDER BY avg_rating DESC;
+```
 #### B) Which rider has the highest average rating?
+```
+SELECT delivery_partner, ROUND(AVG(rider_rating), 2) AS avg_rider_rating
+FROM reviews
+WHERE rider_rating IS NOT NULL
+GROUP BY delivery_partner
+ORDER BY avg_rider_rating DESC;
+```
 #### C) Which customers gave the most reviews?
+```
+SELECT C.customer_id, C.customer_name, COUNT(R.review_id) AS total_reviews
+FROM reviews R
+JOIN customers C ON R.customer_id = C.customer_id
+GROUP BY C.customer_id, C.customer_name
+ORDER BY total_reviews DESC
+LIMIT 10;
+```
 #### D) What is the distribution of restaurant ratings (1–5 stars)?
+```
+SELECT restaurant_rating, COUNT(*) AS total_reviews
+FROM reviews
+GROUP BY restaurant_rating
+ORDER BY restaurant_rating;
+```
 #### E) What percentage of reviews include customer comments?
+```
+SELECT 
+  ROUND((COUNT(CASE WHEN comment IS NOT NULL AND comment <> '' THEN 1 END) / COUNT(*) * 100), 2) AS comment_percentage
+FROM reviews;
+```
 
 # ✅ Conclusion
 The zomato-db-case-study project demonstrates the design and implementation of a comprehensive MySQL relational database for an online food delivery platform.
