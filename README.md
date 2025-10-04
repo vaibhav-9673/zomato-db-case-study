@@ -14,6 +14,8 @@ Synthetic data is generated using Python Faker, ensuring realistic Indian names,
 This provides a large dataset to explore customer behavior, restaurant performance, menu popularity, delivery efficiency, and review analysis.
 The project includes over 30 analytical SQL queries, such as identifying top customers, calculating revenue per restaurant, analyzing delivery times, and finding the most popular menu items.
 
+<img width="310" height="163" alt="image" src="https://github.com/user-attachments/assets/537bcec0-e174-42d4-b8cf-290ed293d10f" />
+
 # Objective
 The main objective of the zomato-db-case-study project is to design and implement a relational database named zomato_db that simulates an online food delivery platform.
 It focuses on:
