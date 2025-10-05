@@ -36,6 +36,8 @@ Table Creation:
 7. deliveries – stores delivery details including order ID, assigned rider, delivery status, pickup and delivery timestamps.
 8. reviews – stores customer ratings and comments for both restaurants and riders.
 
+<blob:https://www-towrco-in.filesusr.com/7b413198-5ffb-4284-978e-1088b3c77eef>
+
 ```sql
 CREATE DATABASE ZOMATO_DB;
 USE ZOMATO_DB;
