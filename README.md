@@ -10,11 +10,10 @@ It manages data related to customers, restaurants, riders, orders, menu items, d
 The schema is carefully designed with foreign keys, constraints, and indexes to maintain data integrity and optimize query performance.
 Synthetic data is generated using Python Faker, ensuring realistic Indian names, addresses, and phone numbers, with timestamps distributed between 2020–2025.
 This provides a large dataset to explore customer behavior, restaurant performance, menu popularity, delivery efficiency, and review analysis.
-The project includes over 30 analytical SQL queries, such as identifying top customers, calculating revenue per restaurant, analyzing delivery times, and finding the most popular menu items.
-```
-<img width="310" height="163" alt="image" src="https://github.com/user-attachments/assets/a0d51718-b4e4-4b26-87db-db77befe4dd0" />
+The project includes over 30 analytical SQL queries, such as identifying top customers, calculating revenue per restaurant, analyzing delivery times, and finding the most popular menu item
 
-```
+<img width="1200" height="630" alt="image" src="https://github.com/user-attachments/assets/60b56e1c-aac7-40a3-a67a-f0bdebd1c9ac" />
+
 # Objective
 The main objective of the zomato-db-case-study project is to design and implement a relational database named zomato_db that simulates an online food delivery platform.
 It focuses on:
