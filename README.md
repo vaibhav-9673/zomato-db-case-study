@@ -6,7 +6,7 @@ Project Title: zomato-db-case-study
 <br> Database: zomato_db
 
 The zomato-db-case-study project is a relational database system built using MySQL that simulates an online food delivery platform like Zomato.
-It manages data related to customers, restaurants, riders, orders, menu items, deliveries, and reviews.
+It manages data related to customers, restaurants, riders, orders, menu items, deliveries, And reviews.
 The schema is carefully designed with foreign keys, constraints, and indexes to maintain data integrity and optimize query performance.
 Synthetic data is generated using Python Faker, ensuring realistic Indian names, addresses, and phone numbers, with timestamps distributed between 2020–2025.
 This provides a large dataset to explore customer behavior, restaurant performance, menu popularity, delivery efficiency, and review analysis.
